@@ -11,7 +11,9 @@ import (
 
 func TestEndToEndIntegrationSuccessCase(t *testing.T) {
 	runperiscopedeploycommand(t, false)
-	checkifpodsrunning(t)
+	// checkifpodsrunning(t)
+	g.Eventually(checkifpodsrunning()).Should(BeTrue)
+
 }
 
 func TestEndToEndIntegrationUnsuccessFulCase(t *testing.T) {
@@ -45,6 +47,10 @@ func checkifpodsrunning(t *testing.T) {
 	firstpodname := strings.Fields(firstpod[1])[0]
 	firstpodstate := strings.Fields(firstpod[1])[2]
 
+	if firstpodstate == "Running" {
+		return True
+	}
+
 	t.Logf(" Outcome is %v ===> %v", firstpodname, firstpodstate)
 
 	if err != nil {
@@ -56,4 +62,6 @@ func checkifpodsrunning(t *testing.T) {
 		g.Expect(err).ToNot(HaveOccurred())
 		t.Logf("successful output: %v\n", output)
 	}
+
+	return false
 }
