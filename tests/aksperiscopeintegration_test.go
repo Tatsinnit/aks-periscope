@@ -16,7 +16,7 @@ func TestEndToEndIntegrationSuccessCase(t *testing.T) {
 	// checkifpodsrunning(t)
 	g.Eventually(func() bool {
 		return checkifpodsrunning(t)
-	}, "20s", "60s").Should(BeTrue())
+	}, "60s", "2s").Should(BeTrue())
 
 }
 
