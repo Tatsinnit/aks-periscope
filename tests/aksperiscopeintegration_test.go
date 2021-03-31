@@ -13,10 +13,15 @@ func TestEndToEndIntegrationSuccessCase(t *testing.T) {
 	runperiscopedeploycommand(t, false)
 	g := NewGomegaWithT(t)
 
-	// checkifpodsrunning(t)
+	// check if pods are running
 	g.Eventually(func() bool {
 		return checkifpodsrunning(t)
 	}, "60s", "2s").Should(BeTrue())
+
+	// check if location of the logs is not empty
+	g.Eventually(func() bool {
+		return IsEmpty(t)
+	}, "60s", "2s").ToNot(BeTrue())
 
 }
 
@@ -68,4 +73,20 @@ func checkifpodsrunning(t *testing.T) bool {
 	}
 
 	return false
+}
+
+func IsEmpty(t *testing.T) (bool, error) {
+	knownloglocation := "/var/log/aks-periscope/"
+
+	f, err := os.Open(knownloglocation)
+	if err != nil {
+		return false, err
+	}
+	defer f.Close()
+
+	_, err = f.Readdirnames(1) // Or f.Readdir(1)
+	if err == io.EOF {
+		return true, nil
+	}
+	return false, err // Either not empty or error, suits both cases
 }
