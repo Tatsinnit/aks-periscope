@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"strings"
 	"testing"
 
 	"github.com/Azure/aks-periscope/pkg/utils"
@@ -10,6 +11,7 @@ import (
 
 func TestEndToEndIntegrationSuccessCase(t *testing.T) {
 	runperiscopedeploycommand(t, false)
+	checkifpodsrunning(t)
 }
 
 func TestEndToEndIntegrationUnsuccessFulCase(t *testing.T) {
@@ -29,6 +31,28 @@ func runperiscopedeploycommand(t *testing.T, validate bool) {
 	}
 
 	if output != "" && !validate {
+		g.Expect(err).ToNot(HaveOccurred())
+		t.Logf("successful output: %v\n", output)
+	}
+}
+
+func checkifpodsrunning(t *testing.T) {
+	g := NewGomegaWithT(t)
+
+	output, err := utils.RunCommandOnContainer("kubectl", "get", "pods", "-n", "aks-periscope")
+	firstpod := strings.Split(output, "\n")
+
+	firstpodname := strings.Fields(firstpod[1])[0]
+	firstpodstate := strings.Fields(firstpod[1])[2]
+
+	t.Logf(" Outcome is %v ===> %v", firstpodname, firstpodstate)
+
+	if err != nil {
+		g.Expect(err).ToNot(HaveOccurred())
+		t.Logf("unsuccessful error: %v\n", err)
+	}
+
+	if output != "" {
 		g.Expect(err).ToNot(HaveOccurred())
 		t.Logf("successful output: %v\n", output)
 	}
