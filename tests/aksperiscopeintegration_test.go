@@ -82,7 +82,7 @@ func IsEmpty(t *testing.T) bool {
 
 	f, err := os.Open(knownloglocation)
 	if err != nil {
-		return false, err
+		return false
 	}
 	defer f.Close()
 
