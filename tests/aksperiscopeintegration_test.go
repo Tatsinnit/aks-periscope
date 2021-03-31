@@ -77,7 +77,7 @@ func checkifpodsrunning(t *testing.T) bool {
 	return false
 }
 
-func IsEmpty(t *testing.T) (bool, error) {
+func IsEmpty(t *testing.T) bool {
 	knownloglocation := "/var/log/aks-periscope/"
 
 	f, err := os.Open(knownloglocation)
@@ -88,7 +88,7 @@ func IsEmpty(t *testing.T) (bool, error) {
 
 	_, err = f.Readdirnames(1) // Or f.Readdir(1)
 	if err == io.EOF {
-		return true, nil
+		return true
 	}
-	return false, err // Either not empty or error, suits both cases
+	return false // Either not empty or error, suits both cases
 }
