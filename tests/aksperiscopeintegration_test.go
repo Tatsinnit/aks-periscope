@@ -42,7 +42,7 @@ func runperiscopedeploycommand(t *testing.T, validate bool) {
 	}
 }
 
-func checkifpodsrunning(t *testing.T) {
+func checkifpodsrunning(t *testing.T) bool {
 	g := NewGomegaWithT(t)
 
 	output, err := utils.RunCommandOnContainer("kubectl", "get", "pods", "-n", "aks-periscope")
@@ -52,7 +52,7 @@ func checkifpodsrunning(t *testing.T) {
 	firstpodstate := strings.Fields(firstpod[1])[2]
 
 	if firstpodstate == "Running" {
-		return True
+		return true
 	}
 
 	t.Logf(" Outcome is %v ===> %v", firstpodname, firstpodstate)
