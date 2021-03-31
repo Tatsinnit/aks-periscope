@@ -86,7 +86,7 @@ func islogsdirempty(t *testing.T) bool {
 
 	output, err_1 := utils.RunCommandOnContainer("ls", "-la", "/var/log/")
 
-	t.Logf(" %v ======== %v", output, err)
+	t.Logf(" %v ======== %v", output, err_1)
 	if err != nil {
 		return false
 	}
