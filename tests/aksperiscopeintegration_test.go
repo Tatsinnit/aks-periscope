@@ -86,12 +86,12 @@ func IsLogsEmpty(t *testing.T) bool {
 	}
 	defer f.Close()
 
-	output, err = f.Readdirnames(1) // Or f.Readdir(1)
+	_, err = f.Readdirnames(1) // Or f.Readdir(1)
 	if err == io.EOF {
 		return true
 	}
 
-	t.Logf("successful output: %v\n", output)
+	t.Logf("successful output: %v\n", _)
 
 	return false // Either not empty or error, suits both cases
 }
