@@ -21,7 +21,7 @@ func TestEndToEndIntegrationSuccessCase(t *testing.T) {
 	// check if location of the logs is not empty
 	g.Eventually(func() bool {
 		return IsEmpty(t)
-	}, "60s", "2s").ToNot(BeTrue())
+	}, "60s", "2s").Should(BeFalse())
 
 }
 
