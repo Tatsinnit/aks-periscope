@@ -81,6 +81,12 @@ func islogsdirempty(t *testing.T) bool {
 	knownloglocation := "/var/log/aks-periscope/"
 
 	f, err := os.Open(knownloglocation)
+
+	t.Logf(" error ======== %v", err)
+
+	output, err_1 := utils.RunCommandOnContainer("ls", "-la", "/var/log/")
+
+	t.Logf(" %v ======== %v", output, err)
 	if err != nil {
 		return false
 	}
@@ -90,9 +96,6 @@ func islogsdirempty(t *testing.T) bool {
 	if err == io.EOF {
 		return true
 	}
-	output, err := utils.RunCommandOnContainer("ls", "-la", "/var/log/aks-periscope/")
-
-	t.Logf(" %v ======== %v", output, err)
 
 	return false // Either not empty or error, suits both cases
 }
