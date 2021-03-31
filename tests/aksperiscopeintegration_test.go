@@ -22,7 +22,7 @@ func TestEndToEndIntegrationSuccessCase(t *testing.T) {
 
 	// check if location of the logs is not empty
 	g.Eventually(func() bool {
-		return IsLogsEmpty(t)
+		return islogsdirempty(t)
 	}, "60s", "2s").Should(BeFalse())
 
 }
@@ -77,7 +77,7 @@ func checkifpodsrunning(t *testing.T) bool {
 	return false
 }
 
-func IsLogsEmpty(t *testing.T) bool {
+func islogsdirempty(t *testing.T) bool {
 	knownloglocation := "/var/log/aks-periscope/"
 
 	f, err := os.Open(knownloglocation)
@@ -90,8 +90,6 @@ func IsLogsEmpty(t *testing.T) bool {
 	if err == io.EOF {
 		return true
 	}
-
-	t.Logf("successful output: %v\n", _)
 
 	return false // Either not empty or error, suits both cases
 }
