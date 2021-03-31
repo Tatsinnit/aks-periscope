@@ -32,7 +32,7 @@ jobs:
 
       - name: Start kind
         run: bash -f ./azurepipeline/start.sh
-        continue-on-error: true
+        continue-on-error: false
 
       - name: Set up Go
         uses: actions/setup-go@v2
@@ -47,4 +47,4 @@ jobs:
 
       - name: Stop kind
         run: bash -f ./azurepipeline/stop.sh
-        continue-on-error: true
+        continue-on-error: false
