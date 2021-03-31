@@ -14,7 +14,9 @@ func TestEndToEndIntegrationSuccessCase(t *testing.T) {
 	g := NewGomegaWithT(t)
 
 	// checkifpodsrunning(t)
-	g.Eventually(checkifpodsrunning(t)).Should(BeTrue)
+	g.Eventually(func() bool {
+		return checkifpodsrunning(t)
+	}, "60s", "30s").Should(BeTrue)
 
 }
 
