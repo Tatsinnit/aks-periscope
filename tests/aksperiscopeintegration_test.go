@@ -51,11 +51,11 @@ func checkifpodsrunning(t *testing.T) bool {
 	firstpodname := strings.Fields(firstpod[1])[0]
 	firstpodstate := strings.Fields(firstpod[1])[2]
 
+	t.Logf(" Outcome is %v ===> %v", firstpodname, firstpodstate)
+
 	if firstpodstate == "Running" {
 		return true
 	}
-
-	t.Logf(" Outcome is %v ===> %v", firstpodname, firstpodstate)
 
 	if err != nil {
 		g.Expect(err).ToNot(HaveOccurred())
