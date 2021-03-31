@@ -11,8 +11,10 @@ import (
 
 func TestEndToEndIntegrationSuccessCase(t *testing.T) {
 	runperiscopedeploycommand(t, false)
+	g := NewGomegaWithT(t)
+
 	// checkifpodsrunning(t)
-	g.Eventually(checkifpodsrunning()).Should(BeTrue)
+	g.Eventually(checkifpodsrunning(t)).Should(BeTrue)
 
 }
 
