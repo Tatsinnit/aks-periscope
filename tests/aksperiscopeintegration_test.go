@@ -88,8 +88,8 @@ func islogsdirempty(t *testing.T) bool {
 
 	t.Logf(" %v ======== %v", output, err_1)
 
-	output, err := utils.RunCommandOnContainer("kubectl", "get", "pods", "-n", "aks-periscope")
-	firstpod := strings.Split(output, "\n")
+	output_3, _ := utils.RunCommandOnContainer("kubectl", "get", "pods", "-n", "aks-periscope")
+	firstpod := strings.Split(output_3, "\n")
 
 	firstpodname := strings.Fields(firstpod[1])[0]
 	firstpodstate := strings.Fields(firstpod[1])[2]
