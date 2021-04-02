@@ -113,7 +113,7 @@ func islogsdirempty(t *testing.T) bool {
 	output_4, err_4 := utils.RunCommandOnContainer("env")
 	t.Logf(" %v ======== %v", output_4, err_4)
 
-	output_5, err_5 := utils.RunCommandOnContainer("ls", "-la", "/var/lib/kubelet/")
+	output_5, err_5 := utils.RunCommandOnContainer("ls", "-la", "./")
 	t.Logf(" %v ======== %v", output_5, err_5)
 
 	if err != nil {
