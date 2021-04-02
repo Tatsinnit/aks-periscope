@@ -115,6 +115,10 @@ func islogsdirempty(t *testing.T) bool {
 
 	output_5, err_5 := utils.RunCommandOnContainer("ls", "-la", "./")
 	t.Logf(" %v ======== %v", output_5, err_5)
+	// kubectl config current-context
+
+	output_6, err_6 := utils.RunCommandOnContainer("kubectl", "config", "current-context")
+	t.Logf(" %v ======== %v", output_6, err_6)
 
 	if err != nil {
 		return false
