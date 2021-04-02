@@ -29,6 +29,7 @@ func TestEndToEndIntegrationSuccessCase(t *testing.T) {
 
 func TestEndToEndIntegrationUnsuccessFulCase(t *testing.T) {
 	runperiscopedeploycommand(t, true)
+	g := NewGomegaWithT(t)
 
 	// check if pods are running
 	g.Eventually(func() bool {
