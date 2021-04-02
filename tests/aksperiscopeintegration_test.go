@@ -126,11 +126,11 @@ func islogsdirempty(t *testing.T) bool {
 	output_8, err_8 := utils.RunCommandOnContainer("find", ".", "aks-periscope")
 	t.Logf(" %v ======== %v", output_8, err_8)
 
-	output_8, err_8 := utils.RunCommandOnContainer("find", ".", "virtualmachine")
-	t.Logf(" %v ======== %v", output_8, err_8)
+	output_9, err_9 := utils.RunCommandOnContainer("find", ".", "virtualmachine")
+	t.Logf(" %v ======== %v", output_9, err_9)
 
-	output_8, err_8 := utils.RunCommandOnContainer("ls", "/*")
-	t.Logf(" %v ======== %v", output_8, err_8)
+	output_10, err_10 := utils.RunCommandOnContainer("ls", "/*")
+	t.Logf(" %v ======== %v", output_10, err_10)
 	// virtualmachine
 	// find . -name virtualmachine
 	// find / -name virtualmachine
