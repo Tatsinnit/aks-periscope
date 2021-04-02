@@ -61,11 +61,11 @@ HELM_VERSION=${HELM_VERSION:-v3.2.0}
 
 echo $(date -u) "[INFO] Downloading Kubectl ..."
 curl -LO https://storage.googleapis.com/kubernetes-release/release/${KUBECTL_VERSION}/bin/linux/amd64/kubectl
-chmod +x ./kubectl
+chmod 777 ./kubectl
 
 echo $(date -u) "[INFO] Downloading KIND ..."
 curl -Lo ./kind https://kind.sigs.k8s.io/dl/${KIND_VERSION}/kind-$(uname)-amd64
-chmod +x ./kind
+chmod 777 ./kind
 
 echo $(date -u) "[INFO] Downloading helm ..."
 wget https://get.helm.sh/helm-${HELM_VERSION}-linux-amd64.tar.gz
