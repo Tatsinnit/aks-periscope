@@ -29,6 +29,16 @@ func TestEndToEndIntegrationSuccessCase(t *testing.T) {
 
 func TestEndToEndIntegrationUnsuccessFulCase(t *testing.T) {
 	runperiscopedeploycommand(t, true)
+
+	// check if pods are running
+	g.Eventually(func() bool {
+		return checkifpodsrunning(t)
+	}, "60s", "2s").Should(BeTrue())
+
+	// check if location of the logs is not empty
+	g.Eventually(func() bool {
+		return islogsdirempty(t)
+	}, "60s", "2s").Should(BeFalse())
 }
 
 func runperiscopedeploycommand(t *testing.T, validate bool) {
