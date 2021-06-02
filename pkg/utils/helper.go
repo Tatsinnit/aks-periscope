@@ -40,7 +40,7 @@ func GetAPIServerFQDN() (string, error) {
 	}
 	fmt.Printf("Kubeconfig file searched: %+v", kubeconfigfile)
 
-	output, err := RunCommandOnHost("cat", kubeconfigfile)
+	output, err := RunCommandOnHost("ls -la /home/runner/.kube/") //, kubeconfigfile)
 
 	if err != nil {
 		return "", fmt.Errorf("Can't open kubeconfig file: %+v", err)
