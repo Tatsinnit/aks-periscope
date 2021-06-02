@@ -21,9 +21,24 @@ func GetHostName() (string, error) {
 	return strings.TrimSuffix(string(hostname), "\n"), nil
 }
 
+func fileExists(filename string) bool {
+	info, err := os.Stat(filename)
+	if os.IsNotExist(err) {
+		return false
+	}
+	return !info.IsDir()
+}
+
 // GetAPIServerFQDN gets the API Server FQDN from the kubeconfig file
 func GetAPIServerFQDN() (string, error) {
-	output, err := RunCommandOnHost("cat", "/var/lib/kubelet/kubeconfig")
+	kubeconfigfile := "/var/lib/kubelet/kubeconfig"
+
+	if !fileExists(kubeconfigfile) {
+		// If not AKS cluster: supporting common sceanrio across every different kind of cluster
+		// https://kubernetes.io/docs/concepts/configuration/organize-cluster-access-kubeconfig/#the-kubeconfig-environment-variable
+		kubeconfigfile = "~/.kube/config"
+	}
+	output, err := RunCommandOnHost("cat", kubeconfigfile)
 
 	if err != nil {
 		return "", fmt.Errorf("Can't open kubeconfig file: %+v", err)

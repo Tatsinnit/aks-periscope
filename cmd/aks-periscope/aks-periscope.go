@@ -37,22 +37,17 @@ func main() {
 	systemPerfCollector := collector.NewSystemPerfCollector(exporter)
 	helmCollector := collector.NewHelmCollector(exporter)
 
-	if strings.EqualFold(clusterType, "connectedCluster") {
-		collectors = append(collectors, containerLogsCollector)
-		collectors = append(collectors, dnsCollector)
-		collectors = append(collectors, helmCollector)
-		collectors = append(collectors, kubeObjectsCollector)
-		collectors = append(collectors, networkOutboundCollector)
+	collectors = append(collectors, containerLogsCollector)
+	collectors = append(collectors, dnsCollector)
+	collectors = append(collectors, kubeObjectsCollector)
+	collectors = append(collectors, networkOutboundCollector)
 
+	if strings.EqualFold(clusterType, "connectedCluster") {
+		collectors = append(collectors, helmCollector)
 	} else {
-		collectors = append(collectors, containerLogsCollector)
-		collectors = append(collectors, dnsCollector)
-		collectors = append(collectors, kubeObjectsCollector)
-		collectors = append(collectors, networkOutboundCollector)
 		collectors = append(collectors, systemLogsCollector)
 		collectors = append(collectors, ipTablesCollector)
 		collectors = append(collectors, nodeLogsCollector)
-		collectors = append(collectors, kubeletCmdCollector)
 		collectors = append(collectors, systemPerfCollector)
 	}
 
