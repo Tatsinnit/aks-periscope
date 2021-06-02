@@ -49,6 +49,21 @@ func runperiscopedeploycommand(t *testing.T, validate bool) {
 	}
 }
 
+func TestAPIServerFQDN(t *testing.T) {
+	g := NewGomegaWithT(t)
+
+	APIServerFQDN, err := utils.GetAPIServerFQDN()
+	if err != nil {
+		g.Expect(err).ToNot(HaveOccurred())
+		t.Logf("error output: %v\n", err)
+	}
+
+	if APIServerFQDN != "" {
+		g.Expect(APIServerFQDN).ToNot(BeEmpty())
+		t.Logf("successful API Server FQDN is: %v\n", APIServerFQDN)
+	}
+}
+
 func checkifpodsrunning(t *testing.T) bool {
 	g := NewGomegaWithT(t)
 
