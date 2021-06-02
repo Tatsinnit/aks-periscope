@@ -38,6 +38,8 @@ func GetAPIServerFQDN() (string, error) {
 		// https://kubernetes.io/docs/concepts/configuration/organize-cluster-access-kubeconfig/#the-kubeconfig-environment-variable
 		kubeconfigfile = "~/.kube/config"
 	}
+	fmt.Printf("Kubeconfig file searched: %+v", kubeconfigfile)
+
 	output, err := RunCommandOnHost("cat", kubeconfigfile)
 
 	if err != nil {
