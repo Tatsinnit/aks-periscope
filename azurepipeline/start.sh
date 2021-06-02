@@ -78,7 +78,7 @@ echo $(date -u) "[INFO] Creating a KIND cluster ${CLUSTER_NAME} ..."
 
 ls -la /home/runner/.kube/
 
-chmod 0555 /home/runner/.kube/config
+chmod 0777 /home/runner/.kube/config
 
 ls -la $HOME/.kube/
 env
