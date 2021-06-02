@@ -36,7 +36,7 @@ func GetAPIServerFQDN() (string, error) {
 	if !fileExists(kubeconfigfile) {
 		// If not AKS cluster: supporting common sceanrio across every different kind of cluster
 		// https://kubernetes.io/docs/concepts/configuration/organize-cluster-access-kubeconfig/#the-kubeconfig-environment-variable
-		kubeconfigfile = "~/.kube/config"
+		kubeconfigfile = "$HOME/.kube/config"
 	}
 	fmt.Printf("Kubeconfig file searched: %+v", kubeconfigfile)
 
