@@ -76,6 +76,10 @@ tar -zxvf helm-${HELM_VERSION}-linux-amd64.tar.gz
 echo $(date -u) "[INFO] Creating a KIND cluster ${CLUSTER_NAME} ..."
 ./kind create cluster --name ${CLUSTER_NAME}
 
+ls -la /home/runner/.kube/
+
+chmod 0555 /home/runner/.kube/config
+
 ls -la $HOME/.kube/
 env
 
