@@ -79,6 +79,6 @@ echo $(date -u) "[INFO] Creating a KIND cluster ${CLUSTER_NAME} ..."
 ls -la $HOME/.kube/
 env
 
-echo $HOME
+echo $HOME "test"
 echo $(date -u) "[INFO] Sleeping for 60s to make sure KIND cluster is ready to accept request ..."
 sleep 60s
